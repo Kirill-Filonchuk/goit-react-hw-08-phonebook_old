@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import actionsContact from '../../redux/contacts-actions';
+import {deleteContact} from '../../redux/contacts-actions';
 import s from './ContactList.module.css';
 
 const ContactList = ({ visibleContact, onDeleteCont }) => (
-  <ul className={s.list}>
+   <ul className={s.list}>
     {visibleContact.map(({ id, name, number }) => (
       <li key={id} className={s.item}>
         {name}:<span>{number}</span>
@@ -17,17 +17,26 @@ const ContactList = ({ visibleContact, onDeleteCont }) => (
 );
 //вспомогательная функция - селектор
 const getVisibleContact = (allContacts, filter) => {
+  console.log('allContacts', ...allContacts);
+  console.log('filter', filter);
   const normalizedFilter = filter.toLowerCase();
 
-  return allContacts.filter(con => con.name.toLowerCase().includes(normalizedFilter));
+  return allContacts.filter((text) => {console.log('Object.values(text)[0]',Object.values(text)[0]); return Object.values(text)[0].toLowerCase().includes(normalizedFilter) });
 };
 
-const mapStateToProps = ({ contacts: { items, filter } }) => ({
-  visibleContact: getVisibleContact(items, filter),
-});
+const mapStateToProps = ({ contacts: { items, filter } }) => {
+  console.log('items', items[0]);
+  console.log('filter',filter );
+  return { visibleContact: getVisibleContact(items, filter), }
+};
+
+
+// const mapStateToProps = ({ contacts: { items, filter } }) => ({
+//    visibleContact: getVisibleContact(items, filter),
+// });
 
 const mapDispatchToProps = dispatch => ({
-  onDeleteCont: id => dispatch(actionsContact.deleteContact(id)),
+  onDeleteCont: id => dispatch(deleteContact(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

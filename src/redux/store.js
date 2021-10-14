@@ -1,6 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import contactsReducer from './contacts-reducer';
+
 const middleware = [...getDefaultMiddleware(), logger];
 const store = configureStore({
   reducer: {
@@ -11,3 +12,8 @@ const store = configureStore({
 });
 
 export default store;
+
+// const myMiddleware = store => next => action => {
+//   console.log('hello', action);
+//   next(action); //передает управление экшенм дальше по цепочке
+// };

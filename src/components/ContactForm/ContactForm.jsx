@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import actionsContact from '../../redux/contacts-actions';
+import operationContact from '../../redux/contacts-operations';
+// import actionsContact from '../../redux/contacts-actions';
 import s from './ContactForm.module.css'
   
 function Form(props) {
@@ -26,6 +27,7 @@ function Form(props) {
   const handleSubmit = e => {
     e.preventDefault();
   //
+    console.log(name);
         const checkName = name.toLowerCase();
       if (props.value.items.some(item => item.name.toLowerCase() === `${checkName}`)) {
         alert(`${name} is already in contacts`);
@@ -75,7 +77,7 @@ function Form(props) {
 }
 
 const mapStateToProps = state => {
-  // console.log('state',state);
+  console.log('state',state);
   return {
     value: state.contacts,
   }
@@ -84,7 +86,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    formSubmitHandler: (value) => dispatch(actionsContact.addContact(value)),
+    formSubmitHandler: (value) => dispatch(operationContact.addContact(value)),
   }
   };
 
