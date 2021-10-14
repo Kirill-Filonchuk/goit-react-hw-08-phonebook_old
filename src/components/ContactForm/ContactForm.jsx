@@ -27,7 +27,6 @@ function Form(props) {
   const handleSubmit = e => {
     e.preventDefault();
   //
-    console.log(name);
         const checkName = name.toLowerCase();
       if (props.value.items.some(item => item.name.toLowerCase() === `${checkName}`)) {
         alert(`${name} is already in contacts`);
@@ -77,7 +76,7 @@ function Form(props) {
 }
 
 const mapStateToProps = state => {
-  console.log('state',state);
+  console.log('Form-state',state);
   return {
     value: state.contacts,
   }

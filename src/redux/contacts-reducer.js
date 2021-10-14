@@ -5,7 +5,9 @@ import {
   addContactsRequest,
   addContSuccess,
   addContError,
-  deleteContact,
+  deleteContactsRequest,
+  deleteContSuccess,
+  deleteContError,
   changeFilter,
 } from './contacts-actions';
 // import initialContact from '../data/start-data.json';...initialContact
@@ -14,7 +16,16 @@ import {
 
 const items = createReducer([], {
   [addContSuccess]: (state, { payload }) => [...state, payload],
-  [deleteContact]: (state, action) => state.filter(con => con.id !== action.payload),
+  [deleteContSuccess]: (state, action) => state.filter(con => con.id !== action.payload),
+});
+
+const loading = createReducer(false, {
+  [addContactsRequest]: () => true,
+  [addContSuccess]: () => false,
+  [addContError]: () => false,
+  [deleteContactsRequest]: () => true,
+  [deleteContSuccess]: () => false,
+  [deleteContError]: () => false,
 });
 
 const filter = createReducer('', {
@@ -24,4 +35,5 @@ const filter = createReducer('', {
 export default combineReducers({
   items,
   filter,
+  loading,
 });
