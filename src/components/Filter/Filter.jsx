@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as contactActions from '../../redux/contacts-actions';
+// import * as contactActions from '../../redux/contacts-actions';
+import { contactSelectors, changeFilter } from '../../redux/';
 
 const Filter = ({ value, onChange }) => (
   <label>
@@ -11,11 +12,15 @@ const Filter = ({ value, onChange }) => (
 );
 
 const mapStateToProps = state => ({
-    value: state.contacts.filter,
+    value: contactSelectors.getFilter(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-    onChange: (e)=>dispatch(contactActions.changeFilter(e.currentTarget.value))
+    onChange: (e)=>dispatch(changeFilter(e.currentTarget.value))
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(Filter);
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+
+// const mapStateToProps = state => ({
+//     value: state.contacts.filter,
+// });

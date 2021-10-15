@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import operationContact from '../../redux/contacts-operations';
-// import actionsContact from '../../redux/contacts-actions';
+// import operationContact from '../../redux/contacts-operations';
+// import contactSelectors from '../../redux/contacts-selectors';
+import {contactOperation, contactSelectors} from '../../redux/'
 import s from './ContactForm.module.css'
   
 function Form(props) {
@@ -78,15 +79,20 @@ function Form(props) {
 const mapStateToProps = state => {
   console.log('Form-state',state);
   return {
-    value: state.contacts,
+    value: contactSelectors.getConactsForm(state),
   }
 };
-
-
 const mapDispatchToProps = dispatch => {
   return {
-    formSubmitHandler: (value) => dispatch(operationContact.addContact(value)),
+    formSubmitHandler: (value) => dispatch(contactOperation.addContact(value)),
   }
   };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
+
+// const mapStateToProps = state => {
+//   console.log('Form-state',state);
+//   return {
+//     value: state.contacts,
+//   }
+// };

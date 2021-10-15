@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 // import {deleteContact} from '../../redux/contacts-actions';
-import contactOperation from '../../redux/contacts-operations';
+// import contactOperation from '../../redux/contacts-operations';
+// import contactSelectors from '../../redux/contacts-selectors';
+import {contactOperation, contactSelectors} from '../../redux/'
 import s from './ContactList.module.css';
 
 const ContactList = ({ visibleContact, onDeleteCont, fetchContacts }) => {
@@ -10,8 +12,7 @@ const ContactList = ({ visibleContact, onDeleteCont, fetchContacts }) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => dispatch(fetchContacts()), [dispatch]);
-  console.log('fetchContacts', fetchContacts);
-
+  
 return (
    <ul className={s.list}>
     {visibleContact.map(({ id, name, number }) => (
@@ -26,20 +27,8 @@ return (
 );
 };
 
-//вспомогательная функция - селектор
-const getVisibleContact = (allContacts, filter) => {
-  console.log('allContacts', ...allContacts);
-  console.log('filter', filter);
-  const normalizedFilter = filter.toLowerCase();
-
-  return allContacts.filter((text) => {console.log('Object.values(text)[0]',Object.values(text)[0]); return Object.values(text)[0].toLowerCase().includes(normalizedFilter) });
-};
-
-const mapStateToProps = ({ contacts: { items, filter } }, state) => {
-   console.log('ContactList-state',state);
-  console.log('items', items[0]);
-  console.log('filter',filter );
-  return { visibleContact: getVisibleContact(items, filter), }
+const mapStateToProps = (state) => {
+  return { visibleContact: contactSelectors.getVisibleContact(state), }
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -48,12 +37,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
-
-
-
-// const mapStateToProps = ({ contacts: { items, filter } }) => ({
-//    visibleContact: getVisibleContact(items, filter),
-// });
 
 /* was: this.state.contact */
 
@@ -74,4 +57,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
 //     return {
 //         visibleContact: visibleContact,
 //     }
+// };
+
+// --------
+// const getVisibleContact = (allContacts, filter) => {
+//   console.log('allContacts', ...allContacts);
+//   console.log('filter', filter);
+//   const normalizedFilter = filter.toLowerCase();
+
+//   return allContacts.filter((text) => {console.log('Object.values(text)[0]',Object.values(text)[0]); return Object.values(text)[0].toLowerCase().includes(normalizedFilter) });
+// };
+
+// const mapStateToProps = ({ contacts: { items, filter } }) => {
+//   console.log('items', items[0]);
+//   console.log('filter',filter );
+//   return { visibleContact: getVisibleContact(items, filter), }
 // };
