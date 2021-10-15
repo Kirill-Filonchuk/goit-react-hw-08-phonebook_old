@@ -13,7 +13,7 @@ import {
   deleteContError,
 } from './contacts-actions';
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'http://localhost:4040';
 
 // axios.get('/contacts').then(response => response.data);
 

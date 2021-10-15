@@ -40,9 +40,9 @@ const filter = createReducer('', {
 });
 
 const error = createReducer(null, {
-  [fetchContError]: (_, { payload }) => payload,
-  [addContError]: (_, { payload }) => payload,
-  [deleteContError]: (_, { payload }) => payload,
+  // [fetchContError]: (_, { payload }) => payload,
+  // [addContError]: (_, { payload }) => payload,
+  // [deleteContError]: (_, { payload }) => payload,
 });
 
 export default combineReducers({
