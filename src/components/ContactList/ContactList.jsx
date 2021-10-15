@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 // import {deleteContact} from '../../redux/contacts-actions';
 import contactOperation from '../../redux/contacts-operations';
 import s from './ContactList.module.css';
 
-const ContactList = ({ visibleContact, onDeleteCont }) => (
+const ContactList = ({ visibleContact, onDeleteCont, fetchContacts }) => {
+  useEffect(() => {
+    fetchContacts()
+  },[fetchContacts]);
+console.log('fetchContacts', fetchContacts);
+return (
    <ul className={s.list}>
     {visibleContact.map(({ id, name, number }) => (
       <li key={id} className={s.item}>
@@ -16,6 +21,8 @@ const ContactList = ({ visibleContact, onDeleteCont }) => (
     ))}
   </ul>
 );
+};
+
 //вспомогательная функция - селектор
 const getVisibleContact = (allContacts, filter) => {
   console.log('allContacts', ...allContacts);
@@ -31,17 +38,18 @@ const mapStateToProps = ({ contacts: { items, filter } }) => {
   return { visibleContact: getVisibleContact(items, filter), }
 };
 
-
-// const mapStateToProps = ({ contacts: { items, filter } }) => ({
-//    visibleContact: getVisibleContact(items, filter),
-// });
-
 const mapDispatchToProps = dispatch => ({
+  fetchContacts: ()=>dispatch(contactOperation.fetchContact),
   onDeleteCont: id => dispatch(contactOperation.deleteContact(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
 
+
+
+// const mapStateToProps = ({ contacts: { items, filter } }) => ({
+//    visibleContact: getVisibleContact(items, filter),
+// });
 
 /* was: this.state.contact */
 

@@ -2,6 +2,9 @@
 import axios from 'axios';
 
 import {
+  fetchContactsRequest,
+  fetchContSuccess,
+  fetchContError,
   addContactsRequest,
   addContSuccess,
   addContError,
@@ -12,6 +15,16 @@ import {
 } from './contacts-actions';
 
 axios.defaults.baseURL = 'http://localhost:3000';
+
+axios.get('/contacts').then(response => response.data);
+
+const fetchContact = () => dispatch => {
+  dispatch(fetchContactsRequest());
+  axios
+    .get('/contacts')
+    .then(({ data }) => dispatch(fetchContSuccess(data)))
+    .catch(error => dispatch(fetchContError(error)));
+};
 
 const addContact = text => dispatch => {
   //http  и по результату диспатчит синхронные экшны
@@ -37,6 +50,7 @@ const deleteContact = contId => dispatch => {
 };
 
 export default {
+  fetchContact,
   addContact,
   deleteContact,
 };

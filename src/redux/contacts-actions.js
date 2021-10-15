@@ -4,6 +4,10 @@
 import { createAction } from '@reduxjs/toolkit';
 
 //3 синхронные Экшена
+export const fetchContactsRequest = createAction('cont/fetchContRequest');
+export const fetchContSuccess = createAction('cont/fetchContSuccess');
+export const fetchContError = createAction('cont/fetchContError');
+
 export const addContactsRequest = createAction('cont/addContRequest');
 export const addContSuccess = createAction('cont/addContSuccess');
 export const addContError = createAction('cont/addContError');
