@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 // import {deleteContact} from '../../redux/contacts-actions';
 import contactOperation from '../../redux/contacts-operations';
 import s from './ContactList.module.css';
 
 const ContactList = ({ visibleContact, onDeleteCont, fetchContacts }) => {
-  useEffect(() => {
-    fetchContacts()
-  },[fetchContacts]);
-console.log('fetchContacts', fetchContacts);
+  const dispatch = useDispatch();
+
+  useEffect(() => dispatch(fetchContacts()), [dispatch]);
+  console.log('fetchContacts', fetchContacts);
+
 return (
    <ul className={s.list}>
     {visibleContact.map(({ id, name, number }) => (
@@ -32,7 +34,8 @@ const getVisibleContact = (allContacts, filter) => {
   return allContacts.filter((text) => {console.log('Object.values(text)[0]',Object.values(text)[0]); return Object.values(text)[0].toLowerCase().includes(normalizedFilter) });
 };
 
-const mapStateToProps = ({ contacts: { items, filter } }) => {
+const mapStateToProps = ({ contacts: { items, filter } }, state) => {
+   console.log('ContactList-state',state);
   console.log('items', items[0]);
   console.log('filter',filter );
   return { visibleContact: getVisibleContact(items, filter), }

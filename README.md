@@ -4,3 +4,5 @@
 базы данных, будет один ендпоинт /contacts. Напиши Redux-операции для работы с асинхронными
 запросами по паттерну request, success и error. Добавь селекторы в файл contacts-selectors.js и
 сделай мемоизацию селекторов там, где необходимо.
+
+"api-server": "json-server --port 4040 --delay 300 --watch db.json"

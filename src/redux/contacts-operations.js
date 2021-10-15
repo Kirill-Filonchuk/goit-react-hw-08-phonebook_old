@@ -16,14 +16,16 @@ import {
 
 axios.defaults.baseURL = 'http://localhost:3000';
 
-axios.get('/contacts').then(response => response.data);
+// axios.get('/contacts').then(response => response.data);
 
-const fetchContact = () => dispatch => {
+const fetchContact = () => async dispatch => {
   dispatch(fetchContactsRequest());
-  axios
-    .get('/contacts')
-    .then(({ data }) => dispatch(fetchContSuccess(data)))
-    .catch(error => dispatch(fetchContError(error)));
+  try {
+    const { data } = await axios.get('/contacts');
+    dispatch(fetchContSuccess(data));
+  } catch (error) {
+    dispatch(fetchContError(error));
+  }
 };
 
 const addContact = text => dispatch => {
@@ -59,3 +61,13 @@ export default {
 //     {name,number },
 //     id
 // }
+
+// До асинк
+// const fetchContact = () => dispatch => {
+//   dispatch(fetchContactsRequest());
+
+//   axios
+//     .get('/contacts')
+//     .then(({ data }) => dispatch(fetchContSuccess(data)))
+//     .catch(error => dispatch(fetchContError(error)));
+// };
