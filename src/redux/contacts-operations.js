@@ -8,7 +8,6 @@ import {
   addContactsRequest,
   addContSuccess,
   addContError,
-  changeFilter,
   deleteContactsRequest,
   deleteContSuccess,
   deleteContError,

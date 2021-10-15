@@ -8,6 +8,7 @@ import s from './ContactList.module.css';
 const ContactList = ({ visibleContact, onDeleteCont, fetchContacts }) => {
   const dispatch = useDispatch();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => dispatch(fetchContacts()), [dispatch]);
   console.log('fetchContacts', fetchContacts);
 
