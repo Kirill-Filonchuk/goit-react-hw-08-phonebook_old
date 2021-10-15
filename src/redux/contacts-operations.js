@@ -29,7 +29,7 @@ const fetchContact = () => async dispatch => {
 
 const addContact = text => dispatch => {
   //http  и по результату диспатчит синхронные экшны
-  console.log('--------text', text);
+  // console.log('--------text', text);
 
   const contItem = text;
 

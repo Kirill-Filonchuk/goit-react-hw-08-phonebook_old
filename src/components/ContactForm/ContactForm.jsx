@@ -77,7 +77,7 @@ function Form(props) {
 }
 
 const mapStateToProps = state => {
-  console.log('Form-state',state);
+  // console.log('Form-state',state);
   return {
     value: contactSelectors.getConactsForm(state),
   }

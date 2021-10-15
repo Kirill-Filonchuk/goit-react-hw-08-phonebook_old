@@ -23,7 +23,7 @@ const getVisibleContact = createSelector([getAllContacts, getFilter], (contacts,
   const normalizedFilter = filter.toLowerCase();
 
   return contacts.filter(text => {
-    console.log('Object.values(text)[0]', Object.values(text)[0]);
+    // console.log('Object.values(text)[0]', Object.values(text)[0]);
     return Object.values(text)[0].toLowerCase().includes(normalizedFilter);
   });
 });

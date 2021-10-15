@@ -1,9 +1,19 @@
 {
   "contacts": [
     {
-      "name": "Tel",
-      "number": "46466",
-      "id": 5
+      "name": "Kirill",
+      "number": "3333-666",
+      "id": 1
+    },
+    {
+      "name": "Kirills",
+      "number": "88797",
+      "id": 2
+    },
+    {
+      "name": "Кирилл",
+      "number": "44665464",
+      "id": 3
     }
   ]
 }

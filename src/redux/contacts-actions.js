@@ -3,9 +3,12 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { createAction } from '@reduxjs/toolkit';
 
-//3 синхронные Экшена
+// синхронные Экшена
+// pending
 export const fetchContactsRequest = createAction('cont/fetchContRequest');
+// fulfiled
 export const fetchContSuccess = createAction('cont/fetchContSuccess');
+// rejected
 export const fetchContError = createAction('cont/fetchContError');
 
 export const addContactsRequest = createAction('cont/addContRequest');
