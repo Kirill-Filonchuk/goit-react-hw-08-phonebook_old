@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
-import axios from 'axios';
-
+import Api from '../service/api';
+// { getApiContact, addApiContact, deleteApiContact }
 import {
   fetchContactsRequest,
   fetchContSuccess,
@@ -13,41 +13,41 @@ import {
   deleteContError,
 } from './contacts-actions';
 
-axios.defaults.baseURL = 'http://localhost:4040';
-
 // axios.get('/contacts').then(response => response.data);
 
 const fetchContact = () => async dispatch => {
   dispatch(fetchContactsRequest());
   try {
-    const { data } = await axios.get('/contacts');
+    const { data } = await Api.getApiContact();
     dispatch(fetchContSuccess(data));
   } catch (error) {
     dispatch(fetchContError(error));
+    // console.error(error.message);
   }
 };
 
-const addContact = text => dispatch => {
+const addContact = text => async dispatch => {
   //http  и по результату диспатчит синхронные экшны
-  // console.log('--------text', text);
-
-  const contItem = text;
-
+  console.log('--------text', text);
   dispatch(addContactsRequest);
-
-  axios
-    .post('/contacts', contItem)
-    .then(({ data }) => dispatch(addContSuccess(data)))
-    .catch(error => dispatch(addContError(error)));
+  const contItem = text;
+  try {
+    const data = await Api.addApiContact(contItem);
+    dispatch(addContSuccess(data));
+  } catch (error) {
+    dispatch(addContError(error));
+  }
 };
 
-const deleteContact = contId => dispatch => {
-  //for show PreLoader
+const deleteContact = contId => async dispatch => {
+  //http  и по результату диспатчит синхронные экшны
   dispatch(deleteContactsRequest());
-  axios
-    .delete(`/contacts/${contId}`)
-    .then(() => dispatch(deleteContSuccess(contId)))
-    .catch(error => dispatch(deleteContError(error)));
+  try {
+    await Api.deleteApiContact(contId);
+    dispatch(deleteContSuccess(contId));
+  } catch (error) {
+    dispatch(deleteContError(error));
+  }
 };
 
 export default {
@@ -55,18 +55,3 @@ export default {
   addContact,
   deleteContact,
 };
-
-// {
-//     {name,number },
-//     id
-// }
-
-// До асинк
-// const fetchContact = () => dispatch => {
-//   dispatch(fetchContactsRequest());
-
-//   axios
-//     .get('/contacts')
-//     .then(({ data }) => dispatch(fetchContSuccess(data)))
-//     .catch(error => dispatch(fetchContError(error)));
-// };
