@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4040';
+// axios.defaults.baseURL = 'http://localhost:4040';
+// axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
+// https://connections-api.herokuapp.com/users/signup
 async function getApiContact() {
   const { data } = await axios.get('/contacts');
   return { data };

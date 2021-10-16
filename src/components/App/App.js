@@ -1,121 +1,43 @@
-import '../App/App.css';
-import React from 'react';
-// import { connect } from 'react-redux';
-
-import ContactForm from '../ContactForm';
-import Filter from '../Filter';
-import ContactList from '../ContactList';
-// Вся информация забирается с локал стоража
+// import { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
+import AppBar from '../AppBar';
+import ContactsView from '../views/ContactsView';
+import HomeView from '../views/HomeView';
+import RegisterView from '../views/RegisterView';
+import LoginView from '../views/LoginView';
+import Container from '../Container/Container';
+// import { authOperations } from './redux/auth';
 function App() {
-  return (
-    <div className="container">
-      <h1>Phonebook</h1>
-      {/* <ContactForm formSubmitHandler={formSubmitHandler} /> */}
-      <ContactForm />
+  // const dispatch = useDispatch();
 
-      <h2>Contacts</h2>
-      {/* <Filter value={filter} onChange={changeFilter} /> */}
-      <Filter />
-      {/* <ContactList visibleContact={visibleContact()} onDeleteCont={onDeleteCont} /> */}
-      <ContactList />
-    </div>
+  // useEffect(() => {
+  //   dispatch('authOperations.fetchCurrentUser()');
+  // }, [dispatch]);
+  return (
+    <Container>
+      <AppBar />
+
+      <Switch>
+        <Route exact path="/" component={HomeView} />
+        <Route path="/register" component={RegisterView} />
+        <Route path="/login" component={LoginView} />
+        <Route path="/contacts" component={ContactsView} />
+      </Switch>
+    </Container>
   );
 }
 
 export default App;
 
-// const mapStateToProps = state => {
-//   return {
-//     value: state.contacts.items,
-//   }
-// }
-// export default connect(mapStateToProps)(App);
+// <div className="container">
+//   <h1>Phonebook</h1>
+//   {/* <ContactForm formSubmitHandler={formSubmitHandler} /> */}
+//   <ContactForm />
 
-// class App extends Component {
-//   state = {
-//     contacts: initialContact,
-//     filter: '',
-//   };
-
-//   componentDidMount() {
-//     const contacts = localStorage.getItem('contacts');
-//     const parsetContacts = JSON.parse(contacts);
-
-//     if (parsetContacts) {
-//       this.setState({
-//         contacts: [...parsetContacts],
-//       });
-//     }
-//   }
-
-//   componentDidUpdate(prevState) {
-//     // console.log('prevState.contacts', prevState.contacts);
-//     // console.log('this.state.contacts', this.state.contacts);
-//     if (this.state.contacts !== prevState.contacts) {
-//       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-//     }
-//   }
-
-//   formSubmitHandler = ({ name, number }) => {
-//     const cont = {
-//       id: shortid.generate(),
-//       name,
-//       number,
-//     };
-
-//     const checkName = cont.name.toLowerCase();
-//     if (this.state.contacts.some(item => item.name.toLowerCase() === `${checkName}`)) {
-//       alert(`${cont.name} is already in contacts`);
-//       return;
-//     }
-//     this.setState(prevState => {
-//       const contacts = [...prevState.contacts, cont];
-//       return {
-//         contacts,
-//       };
-//     });
-//     // console.log('Arr', this.state.contacts);
-//   };
-
-//   changeFilter = e => {
-//     // console.log(e.currentTarget.value);
-//     this.setState({
-//       filter: e.currentTarget.value,
-//     });
-//   };
-
-//   onDeleteCont = id => {
-//     // console.log(id);
-//     this.setState(prevState => ({
-//       contacts: prevState.contacts.filter(con => con.id !== id),
-//     }));
-//   };
-//   // filter создаёт НОВЫЙ массив, в который войдут только те элементы arr, для которых вызов callback(item, i, arr) возвратит true.
-
-//   visibleContact = () => {
-//     const normalizedFilter = this.state.filter.toLowerCase();
-//     const visibleContact = this.state.contacts.filter(con =>
-//       con.name.toLowerCase().includes(normalizedFilter),
-//     );
-//     return visibleContact;
-//   };
-
-//   render() {
-//     // const normalizedFilter = this.state.filter.toLowerCase();
-//     // const visibleContact = this.state.contacts.filter(con =>
-//     //   con.name.toLowerCase().includes(normalizedFilter),
-//     // );
-//     return (
-//       <div className="container">
-//         <h1>Phonebook</h1>
-
-//         <ContactForm formSubmitHandler={this.formSubmitHandler} />
-
-//         <h2>Contacts</h2>
-//         <Filter value={this.state.filter} onChange={this.changeFilter} />
-
-//         <ContactList visibleContact={this.visibleContact()} onDeleteCont={this.onDeleteCont} />
-//       </div>
-//     );
-//   }
-// }
+//   <h2>Contacts</h2>
+//   {/* <Filter value={filter} onChange={changeFilter} /> */}
+//   <Filter />
+//   {/* <ContactList visibleContact={visibleContact()} onDeleteCont={onDeleteCont} /> */}
+//   <ContactList />
+// </div>;
