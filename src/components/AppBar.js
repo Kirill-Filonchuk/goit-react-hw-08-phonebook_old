@@ -21,6 +21,7 @@ export default function AppBar() {
       <Navigation />
       <UserMenu />
       <AuthNav />
+      {/* <AuthNav /> меню из "Регистрации и Войти" */}
       {/* {isLoggedIn ? <UserMenu /> : <AuthNav />} */}
     </header>
   );

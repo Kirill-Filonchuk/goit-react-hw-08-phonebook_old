@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import Api from '../service/api';
+import Api from '../../service/api';
 // { getApiContact, addApiContact, deleteApiContact }
 import {
   fetchContactsRequest,
@@ -40,11 +40,13 @@ const addContact = text => async dispatch => {
 };
 
 const deleteContact = contId => async dispatch => {
+  const id = Number(contId);
+  console.log('id', id);
   //http  и по результату диспатчит синхронные экшны
   dispatch(deleteContactsRequest());
   try {
-    await Api.deleteApiContact(contId);
-    dispatch(deleteContSuccess(contId));
+    await Api.deleteApiContact(id);
+    dispatch(deleteContSuccess(id));
   } catch (error) {
     dispatch(deleteContError(error));
   }

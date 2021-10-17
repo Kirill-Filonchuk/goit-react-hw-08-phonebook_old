@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import {deleteContact} from '../../redux/contacts-actions';
 // import contactOperation from '../../redux/contacts-operations';
 // import contactSelectors from '../../redux/contacts-selectors';
-import {contactOperation, contactSelectors} from '../../redux/'
+import {contactOperation, contactSelectors} from '../../redux/contacts'
 import s from './ContactList.module.css';
 
 const ContactList = ({ visibleContact, onDeleteCont, fetchContacts }) => {

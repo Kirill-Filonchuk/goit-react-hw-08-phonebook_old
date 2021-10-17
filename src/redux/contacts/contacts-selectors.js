@@ -1,6 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { createSelector } from 'reselect';
 
+const getLoadind = state => state.loading;
 const getFilter = state => state.contacts.filter;
 const getConactsForm = state => state.contacts;
 const getAllContacts = state => {
@@ -32,4 +33,5 @@ export default {
   getConactsForm,
   getFilter,
   getVisibleContact,
+  getLoadind, //adding
 };

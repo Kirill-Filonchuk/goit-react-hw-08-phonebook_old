@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 // import operationContact from '../../redux/contacts-operations';
 // import contactSelectors from '../../redux/contacts-selectors';
-import {contactOperation, contactSelectors} from '../../redux/'
+import {contactOperation, contactSelectors} from '../../redux/contacts'
 import s from './ContactForm.module.css'
   
 function Form(props) {
